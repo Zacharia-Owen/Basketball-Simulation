@@ -1,4 +1,4 @@
-export const Game = {
+export const GAME = {
     QUARTERS: 4,
     QUARTER_LENGTH_SECONDS: 12 * 60,
     OVERTIME_LENGTH_SECONDS: 5 * 60,
