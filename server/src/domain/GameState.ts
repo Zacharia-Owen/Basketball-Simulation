@@ -1,5 +1,5 @@
-import { Player } from "./Players";
-import { Team } from "./Teams";
+import { Player } from "./Player";
+import { Team } from "./Team";
 
 export type TeamSide = "home" | "away";
 
