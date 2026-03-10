@@ -1,5 +1,5 @@
 import { GameState } from "../../domain/GameState";
-import { SeededRNG } from "../rng/seedRNG";
+import { SeededRNG } from "../rng/SeedRNG";
 import { SHOT_TYPES } from "../../config/constants";
 
 export type OffensiveAction = "two_point_attempt" | "three_point_attempt" | "free_throw_trip" | "shot_clock_violation" | "turnover";
@@ -33,6 +33,6 @@ export function chooseAction(
 
   if (roll < turnoverProb) return "turnover";
   if (roll < turnoverProb + SHOT_TYPES.PROB_FREE_THROW_TRIP) return "free_throw_trip";
-  if (roll < turnoverProb + SHOT_TYPES.PROB_FREE_THROW_TRIP + threeProb) return "three_point_attempt";
+  if (roll < turnoverProb + SHOT_TYPES.PROB_FREE_THROW_TRIP + threeProb + SHOT_TYPES.PROB_SHOT_CLOCK_VIOLATION) return "three_point_attempt";
   return "two_point_attempt";
 }

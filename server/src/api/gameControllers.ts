@@ -1,8 +1,8 @@
-import { request, response } from 'express';
+import { Request, Response } from 'express';
 import { runGameSimulation } from "../simulation/runGameSim";
-import { getGameById, getTeamWithPlayers, saveGameResult } from "../db/game.repository";
+import { getGameById, getTeamWithPlayers, saveGameResult } from "../db/gameRepository";
 
-export async function simulateGameController(req: Request, res: response) {
+export async function simulateGameController(req: Request, res: Response) {
     try {
         const { gameId } = req.body;
 
@@ -37,8 +37,8 @@ export async function simulateGameController(req: Request, res: response) {
         res.json({
             gameId,
             finalscore: simulationResult.score,
-            boxscore: simulationResult.boxscore,
-            quaters: simulationResult.quarters,
+            boxscore: simulationResult.boxScore,
+            quaters: simulationResult.quarter,
         });
         
     } catch (error) {

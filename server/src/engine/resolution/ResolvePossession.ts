@@ -1,8 +1,8 @@
 import { GameState } from "../../domain/GameState";
 import { OffensiveAction } from "../actions/ChooseActions";
-import { SeededRNG } from "../rng/seedRNG";
+import { SeededRNG } from "../rng/SeedRNG";
 import { SHOT_TYPES, RATING_SCALE, POINTS, REBOUND } from "../../config/constants";
-import { Player } from "../../domain/Players";
+import { Rating } from "../../domain/Rating";
 
 export interface PossessionResult {
     pointsScored: number;
@@ -17,7 +17,7 @@ export interface PossessionResult {
 function getActiveRatingAverage(
     state: GameState,
     side: "home" | "away",
-    rating: keyof Player["ratings"]
+    rating: keyof Rating
 ): number {
     const active = state[side].players.filter(p =>
         state[side].activePlayers.includes(p.id.toString())

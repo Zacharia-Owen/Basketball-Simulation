@@ -1,4 +1,4 @@
-import { runGameSimulation } from "./simulation/RunGameSim";
+import { runGameSimulation } from "./simulation/runGameSim";
 import { Team } from "./domain/Team";
 
 const mockTeam = (id: number, name: string): Team => ({

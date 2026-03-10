@@ -1,5 +1,5 @@
 import { GameState } from "../domain/GameState";
-import { SeededRNG } from "./rng/seedRNG";
+import { SeededRNG } from "./rng/SeedRNG";
 import { chooseAction } from "./actions/ChooseActions";
 import { resolvePossession } from "./resolution/ResolvePossession";
 import { STAMINA } from "../config/constants";
