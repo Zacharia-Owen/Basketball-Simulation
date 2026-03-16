@@ -1,7 +1,7 @@
 import { Team } from "../domain/Team";
 import { GameState } from "../domain/GameState";
-import { simulatePossession } from "../engine/simulatePossession";
-import { SeededRNG } from "../engine/rng/seedRNG";
+import { simulatePossession } from "../engine/SimulatePossession";
+import { SeededRNG } from "../engine/rng/SeedRNG";
 import { SIM, STAMINA, GAME } from "../config/constants";
 
 // pick starters based on overall rating
