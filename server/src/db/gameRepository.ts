@@ -1,8 +1,8 @@
 import { pool } from "./db";
 import { Game } from "../domain/Game";
-import { Team } from "../domain/Teams";
-import { Player } from "../domain/Players";
-import { Rating } from "../domain/Ratings";
+import { Team } from "../domain/Team";
+import { Player } from "../domain/Player";
+import { Rating } from "../domain/Rating";
 
 // fetching a game by ID
 export async function getGameById(gameId: number): Promise<Game | null> {
@@ -29,11 +29,20 @@ export async function getGameById(gameId: number): Promise<Game | null> {
 export async function getPlayersByTeamId(teamId: number): Promise<Player[]> {
   const result = await pool.query(
     `SELECT 
-       p.id, p.first_name, p.last_name, p.position,
-       r.shooting, r.finishing, r.defense, r.passing,
-       r.rebounding, r.stamina, r.speed, r.dribbling, r.overall
+       p.id, 
+       p.first_name, 
+       p.last_name, 
+       p.position,
+       r.shooting, 
+       r.finishing, 
+       r.defense, 
+       r.passing,
+       r.rebounding, 
+       r.stamina, 
+       r.speed, 
+       r.dribbling, 
+       r.overall
      FROM players p
-     JOIN ratings r ON r.player_id = p.id
      WHERE p.team_id = $1`,
     [teamId]
   );
@@ -63,6 +72,8 @@ export async function getTeamWithPlayers(teamId: number): Promise<Team | null> {
         `SELECT id, name FROM teams WHERE id = $1`,
         [teamId]
     );
+
+    if (teamResult.rows.length === 0) return null;
 
     const players = await getPlayersByTeamId(teamId);
 
