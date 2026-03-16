@@ -2,7 +2,7 @@ import { GameState } from "../domain/GameState";
 import { SeededRNG } from "./rng/SeedRNG";
 import { chooseAction } from "./actions/ChooseActions";
 import { resolvePossession } from "./resolution/ResolvePossession";
-import { STAMINA } from "../config/constants";
+import { GAME, STAMINA } from "../config/constants";
 
 export function simulatePossession(
     state: GameState,
@@ -35,9 +35,13 @@ export function simulatePossession(
     const activePlayers = state[offense].players.filter(p =>
         state[offense].activePlayers.includes(p.id.toString())
     );
-    const scorer = activePlayers.reduce((best, p) => 
-        p.ratings.shooting > best.ratings.shooting ? p : best, activePlayers[0]
-    ); 
+const totalWeight = activePlayers.reduce((sum, p) => sum + p.ratings.shooting, 0);
+    let roll = rng.next() * totalWeight;
+    const scorer = activePlayers.find(p => {
+        roll -= p.ratings.shooting;
+        return roll <= 0;
+    }) ?? activePlayers[0]; // incase of an error, just pick the first active player
+
     const scorerID = scorer.id.toString();
 
     if (result.pointsScored > 0) {
@@ -88,7 +92,7 @@ export function simulatePossession(
 
     // checking quarter transitions
     const quarterLength = 720 // 12 mins in seconds
-    const updatedQuarter = state.quarter + Math.floor((state.clock - updateClock) / quarterLength);
+    const updatedQuarter = state.quarter + Math.floor((GAME.QUARTER_LENGTH_SECONDS * GAME.QUARTERS - updateClock) / GAME.QUARTER_LENGTH_SECONDS) + 1;
 
     // return to fully updated state of the game
     return {

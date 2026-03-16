@@ -1,6 +1,6 @@
 import { GameState } from "../domain/GameState";
 import { resolvePossession } from "./resolution/ResolvePossession";
-import { SeededRNG } from "./rng/seedRNG";
+import { SeededRNG } from "./rng/SeedRNG";
 import { simulatePossession } from "./SimulatePossession";
 
 export interface SimulationResult {
