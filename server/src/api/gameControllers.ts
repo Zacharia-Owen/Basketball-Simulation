@@ -36,9 +36,9 @@ export async function simulateGameController(req: Request, res: Response) {
         // returning the result to the client
         res.json({
             gameId,
-            finalscore: simulationResult.score,
-            boxscore: simulationResult.boxScore,
-            quaters: simulationResult.quarter,
+            finalScore: simulationResult.score,
+            boxScore: simulationResult.boxScore,
+            quarters: simulationResult.quarter,
         });
         
     } catch (error) {
