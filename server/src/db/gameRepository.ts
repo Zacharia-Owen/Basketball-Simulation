@@ -33,15 +33,15 @@ export async function getPlayersByTeamId(teamId: number): Promise<Player[]> {
        p.first_name, 
        p.last_name, 
        p.position,
-       r.shooting, 
-       r.finishing, 
-       r.defense, 
-       r.passing,
-       r.rebounding, 
-       r.stamina, 
-       r.speed, 
-       r.dribbling, 
-       r.overall
+       p.shooting, 
+       p.finishing, 
+       p.defense, 
+       p.passing,
+       p.rebounding, 
+       p.stamina, 
+       p.speed, 
+       p.dribbling, 
+       p.overall
      FROM players p
      WHERE p.team_id = $1`,
     [teamId]
